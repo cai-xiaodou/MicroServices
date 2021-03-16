@@ -5,9 +5,7 @@ import cn.com.springcloud.entities.Payment;
 import cn.com.springcloud.service.PaymentService;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,15 +22,15 @@ public class PaymentController {
         int result = paymentService.create(payment);
         log.info("数据插入结果："+result);
         if (result > 0) {
-            return new CommonResult(200,"success",result);
+            return new CommonResult(200,"插入数据成功",result);
         } else {
-            return new CommonResult(444,"failed",result);
+            return new CommonResult(444,"插入数据失败",result);
         }
     }
 
-    @PostMapping(value = "/payment/getPaymentById")
-    public CommonResult getPaymentById(HttpServletRequest request, @RequestBody JSONObject jsonParams){
-        Payment payment = paymentService.getPaymentById(jsonParams.getLong("id"));
+    @GetMapping(value = "/payment/getPaymentById/{id}")
+    public CommonResult<Payment> getPaymentById(HttpServletRequest request,@PathVariable("id") Long id){
+        Payment payment = paymentService.getPaymentById(id);
         if (payment != null) {
             return new CommonResult(200,"查找数据成功",payment);
         } else {
