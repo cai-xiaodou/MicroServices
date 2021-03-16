@@ -6,6 +6,8 @@ import cn.com.springcloud.service.PaymentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -20,6 +22,8 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment getPaymentById(Long id) {
-        return paymentDao.getPaymentById(id);
+        Map<String,Object> map = new HashMap<>();
+        map.put("id",id);
+        return paymentDao.getPaymentById(map);
     }
 }
