@@ -3,7 +3,6 @@ package cn.com.springcloud.controller;
 import cn.com.springcloud.entities.CommonResult;
 import cn.com.springcloud.entities.Payment;
 import cn.com.springcloud.service.PaymentService;
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
