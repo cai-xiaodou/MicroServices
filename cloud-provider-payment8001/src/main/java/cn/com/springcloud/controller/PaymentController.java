@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -60,10 +61,16 @@ public class PaymentController {
                 String host = instance.getHost();
                 int port = instance.getPort();
                 URI uri = instance.getUri();
+                String instanceId = instance.getInstanceId();
+                Map<String, String> metadata = instance.getMetadata();
+                String scheme = instance.getScheme();
                 instanceJson.put("serviceId",serviceId);
                 instanceJson.put("host",host);
                 instanceJson.put("port",port);
                 instanceJson.put("uri",uri);
+                instanceJson.put("instanceId",instanceId);
+                instanceJson.put("metadata",metadata);
+                instanceJson.put("scheme",scheme);
                 serviceJson.put(instance.getInstanceId(),instanceJson);
             }
             json.put(service,serviceJson);
