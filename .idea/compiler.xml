@@ -16,6 +16,7 @@
         <module name="cloud-consumer-order80" />
         <module name="cloud-consumerconsul-order8083" />
         <module name="cloud-providerconsul-payment8006" />
+        <module name="cloud-consumer-feign-order8084" />
         <module name="cloud-consumerzk-order8082" />
       </profile>
     </annotationProcessing>
