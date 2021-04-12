@@ -20,6 +20,7 @@
         <module name="cloud-provider-payment8002" />
         <module name="cloud-provider-payment8001" />
         <module name="cloud-provider-hystrix-payment8005" />
+        <module name="cloudalibaba-sentinel-service8401" />
         <module name="cloud-consumer-feign-hystrix-order8085" />
         <module name="cloudalibaba-consumer-nacos-order83" />
         <module name="cloud-stream-rabbitmq-provider8801" />
