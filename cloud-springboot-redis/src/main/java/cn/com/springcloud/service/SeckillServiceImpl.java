@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Slf4j
 @Service
 public class SeckillServiceImpl implements SeckillService {
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public boolean seckill(String productId, String userId) {
@@ -27,7 +28,7 @@ public class SeckillServiceImpl implements SeckillService {
         }
         Boolean isExitUserId = redisTemplate.opsForSet().isMember(userKey, userId);
         if (isExitUserId) {
-            log.info("用户"+userId+"已成功秒杀，请勿重复操作");
+            log.info("用户" + userId + "已成功秒杀，请勿重复操作");
             return false;
         }
         if (Integer.valueOf(kc) <= 0) {
@@ -38,11 +39,12 @@ public class SeckillServiceImpl implements SeckillService {
         // 事务
         redisTemplate.multi();
         redisTemplate.opsForValue().decrement(kcKey);
-        redisTemplate.opsForSet().add(userKey,userKey);
+        redisTemplate.opsForSet().add(userKey, userId);
         List<Object> exec = redisTemplate.exec();
         if (exec == null || exec.isEmpty()) {
             return false;
         }
         return true;
     }
+
 }
